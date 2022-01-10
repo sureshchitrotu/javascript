@@ -1,0 +1,32 @@
+//* Call/Apply  - an object can use a method belongs to another object or completely seperate function
+
+let obj = {
+  a: 1,
+  b: 2,
+  getSum: function (n = 0) {
+    return this.a + this.b + n;
+  },
+};
+
+let newObj = {
+  a: 10,
+  b: 20,
+};
+
+//Call
+let sum = obj.getSum.call(newObj, 10);
+console.log(sum);
+
+//Apply
+sum = obj.getSum.apply(newObj, [20]);
+console.log(sum);
+
+//Bind
+let getTotal = obj.getSum;
+sum = getTotal(10);
+console.log(sum); // Nan due to the getTotal's execution in global scope
+
+//Solution
+getTotal = obj.getSum.bind(obj);
+sum = getTotal(30);
+console.log(sum);
